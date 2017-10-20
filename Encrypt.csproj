@@ -112,9 +112,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="anim2small.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="anim.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
