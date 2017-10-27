@@ -23,8 +23,8 @@ namespace Encrypt
 		{
 			InitializeComponent();
 			this.globalEventProvider = new Encrypt.UserActivityMonitor.GlobalEventProvider();
-			this.globalEventProvider.KeyUp += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
-			this.globalEventProvider.KeyDown += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyDown);
+			//this.globalEventProvider.KeyUp += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyUp);
+			//this.globalEventProvider.KeyDown += new System.Windows.Forms.KeyEventHandler(this.globalEventProvider_KeyDown);
 		}
 
 		private void Main_Load(object sender, EventArgs e)
@@ -33,8 +33,8 @@ namespace Encrypt
 			encDecPanel.AllowDrop = true;
 			processing = false;
 			EncDec.Processed += EncDec_Processed;
-			WindowState = FormWindowState.Minimized;
-			ShowInTaskbar = false;
+			//WindowState = FormWindowState.Minimized;
+			//ShowInTaskbar = false;
 		}
 
 		private void okButton_Click(object sender, EventArgs e)
@@ -219,7 +219,7 @@ namespace Encrypt
 			}
 		}
 
-		private void globalEventProvider_KeyDown(object sender, KeyEventArgs e)
+		/*private void globalEventProvider_KeyDown(object sender, KeyEventArgs e)
 		{
 			if(e.KeyCode == Keys.LControlKey || e.KeyCode == Keys.RControlKey)
 			{
@@ -246,19 +246,19 @@ namespace Encrypt
 				ShowInTaskbar = true;
 				e.Handled = true;
 			}
-		}
+		}*/
 
 		private void Main_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			MessageBox.Show("Per una maggiore sicurezza si consiglia di rimuovere la chiave usb dopo la chiusura del programma",
 				"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-			WindowState = FormWindowState.Minimized;
-			ShowInTaskbar = false;
+			//WindowState = FormWindowState.Minimized;
+			//ShowInTaskbar = false;
 			EncDec.Cancel();
-			e.Cancel = true;
+			//e.Cancel = true;
 		}
 
-		private void globalEventProvider_KeyUp(object sender, KeyEventArgs e)
+		/*private void globalEventProvider_KeyUp(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.LControlKey || e.KeyCode == Keys.RControlKey)
 			{
@@ -271,7 +271,7 @@ namespace Encrypt
 				altPressed = false;
 				hotkeyIndex = 0;
 			}
-		}
+		}*/
 
 		private void SetMessage(string message)
 		{
