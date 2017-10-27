@@ -71,7 +71,7 @@ namespace Encrypt.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AES128.
+        ///   Looks up a localized string similar to AES256.
         /// </summary>
         internal static string CipherAlgorithm {
             get {
@@ -89,7 +89,7 @@ namespace Encrypt.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A1u7T&amp;%kç?èX&amp;438Uh0?kàé§.
+        ///   Looks up a localized string similar to A6p9&amp;t3£5iàP0/7ùO!d6&amp;YjP.
         /// </summary>
         internal static string Key {
             get {

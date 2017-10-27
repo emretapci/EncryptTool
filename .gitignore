@@ -3,3 +3,8 @@
 ################################################################################
 
 /bin/Debug
+/obj/Debug
+/obj/Release
+/bin/Release
+/.vs/Encrypt/v14
+/.vs/config

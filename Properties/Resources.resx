@@ -124,10 +124,10 @@
     <value>JtaorZfHX/xUj2hz5ek85HVHnj4aEJc4HlQiH7U+wdI=</value>
   </data>
   <data name="CipherAlgorithm" xml:space="preserve">
-    <value>AES128</value>
+    <value>AES256</value>
   </data>
   <data name="Key" xml:space="preserve">
-    <value>A1u7T&amp;%kç?èX&amp;438Uh0?kàé§</value>
+    <value>A6p9&amp;t3£5iàP0/7ùO!d6&amp;YjP</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="anim" type="System.Resources.ResXFileRef, System.Windows.Forms">

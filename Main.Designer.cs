@@ -276,12 +276,12 @@
 			this.Controls.Add(this.passwordPanel);
 			this.Controls.Add(this.encDecPanel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "Main";
-			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Encrypt/Decrypt";
+			this.Text = "Smooker data encryption";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
 			this.Load += new System.EventHandler(this.Main_Load);
 			((System.ComponentModel.ISupportInitialize)(this.logoPicture)).EndInit();
