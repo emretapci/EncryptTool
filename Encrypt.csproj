@@ -13,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '1|AnyCPU'">
     <OutputPath>bin\1\</OutputPath>
@@ -42,6 +45,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
@@ -92,6 +96,9 @@
     <Compile Include="UserActivityMonitor\HookManager.Structures.cs" />
     <Compile Include="UserActivityMonitor\HookManager.Windows.cs" />
     <Compile Include="UserActivityMonitor\MouseEventExtArgs.cs" />
+    <EmbeddedResource Include="Main.it.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -116,6 +123,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="anim.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="logo.jpg" />
+    <None Include="anim2.gif" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />

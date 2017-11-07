@@ -24,6 +24,7 @@ namespace Encrypt
 
 		//If encrypt is true, encrypts the given file into a new file in the same folder with name ".enc" appended.
 		//If encrypt is false, decrypts the given file into a new file in the same folder with name ".dec" appended.
+        //limit: file size limit
 		internal static void EncryptOrDecrypt(CipherAlgorithm ca, string inputFile, string outputFile, string encryptionKey, bool encrypt)
 		{
 			run = true;

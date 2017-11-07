@@ -121,16 +121,25 @@
     <value>123</value>
   </data>
   <data name="PasswordHash" xml:space="preserve">
-    <value>JtaorZfHX/xUj2hz5ek85HVHnj4aEJc4HlQiH7U+wdI=</value>
+    <value>aJgOG47N74YdHRNEBt2ZcnUrCKD4zvt5pLy62sygrq0=</value>
   </data>
   <data name="CipherAlgorithm" xml:space="preserve">
-    <value>AES256</value>
-  </data>
-  <data name="Key" xml:space="preserve">
-    <value>A6p9&amp;t3£5iàP0/7ùO!d6&amp;YjP</value>
+    <value>AES128</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="anim" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\anim.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\anim2.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DemoVersion" xml:space="preserve">
+    <value>false</value>
   </data>
 </root>

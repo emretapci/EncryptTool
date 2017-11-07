@@ -71,11 +71,30 @@ namespace Encrypt.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AES256.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap anim2 {
+            get {
+                object obj = ResourceManager.GetObject("anim2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AES128.
         /// </summary>
         internal static string CipherAlgorithm {
             get {
                 return ResourceManager.GetString("CipherAlgorithm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to false.
+        /// </summary>
+        internal static string DemoVersion {
+            get {
+                return ResourceManager.GetString("DemoVersion", resourceCulture);
             }
         }
         
@@ -89,16 +108,27 @@ namespace Encrypt.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A6p9&amp;t3£5iàP0/7ùO!d6&amp;YjP.
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static string Key {
+        internal static System.Drawing.Icon icon {
             get {
-                return ResourceManager.GetString("Key", resourceCulture);
+                object obj = ResourceManager.GetObject("icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to JtaorZfHX/xUj2hz5ek85HVHnj4aEJc4HlQiH7U+wdI=.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo {
+            get {
+                object obj = ResourceManager.GetObject("logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to aJgOG47N74YdHRNEBt2ZcnUrCKD4zvt5pLy62sygrq0=.
         /// </summary>
         internal static string PasswordHash {
             get {

@@ -15,9 +15,11 @@ namespace Encrypt
 		private bool processing;
 		private long processedSizeTotal;
 		private long totalSize;
-		private bool ctrlPressed, altPressed;
-		private int hotkeyIndex;
+		//private bool ctrlPressed, altPressed;
+		//private int hotkeyIndex;
+		private string password;
 		private UserActivityMonitor.GlobalEventProvider globalEventProvider;
+		private SHA256 hasher = SHA256.Create();
 
 		public Main()
 		{
@@ -35,18 +37,28 @@ namespace Encrypt
 			EncDec.Processed += EncDec_Processed;
 			//WindowState = FormWindowState.Minimized;
 			//ShowInTaskbar = false;
+
+			SetUiEncDec(false);
+
+			if (Resources.DemoVersion == "true")
+			{
+				passwordTextbox.TextChanged += new System.EventHandler(this.passwordTextbox_TextChanged);
+			}
+
+			password = string.Empty;
+
+			dragDropHereLabel.Location = new Point((encDecPanel.Size.Width - dragDropHereLabel.Size.Width) / 2,
+				(encDecPanel.Size.Height - dragDropHereLabel.Size.Height) / 2);
 		}
 
 		private void okButton_Click(object sender, EventArgs e)
 		{
-			var hasher = SHA256.Create();
 			var hash = Convert.ToBase64String(hasher.ComputeHash(Encoding.Unicode.GetBytes(passwordTextbox.Text)));
+			hash = Convert.ToBase64String(hasher.ComputeHash(Encoding.Unicode.GetBytes(hash)));
 
 			if (hash == Resources.PasswordHash)
 			{
-				passwordPanel.Visible = false;
-				encDecPanel.Visible = true;
-				SetProcessing(false);
+				SetUiEncDec(true);
 			}
 			else
 			{
@@ -54,6 +66,46 @@ namespace Encrypt
 				passwordTextbox.Text = "";
 				passwordTextbox.Focus();
 			}
+		}
+
+		private void SetUiEncDec(bool encDecPanelVisible)
+		{
+			if (encDecPanelVisible)
+			{
+				logoPanel.Visible =
+				animationPicture.Visible =
+				passwordPanel.Visible = false;
+				encDecPanel.Visible = true;
+
+				panel1.Location = new Point(4, 4);
+				panel2.Location = new Point(4, 4);
+				panel9.Location = new Point(encDecPanel.Width - 19, 4);
+				panel10.Location = new Point(encDecPanel.Width - 8, 4);
+				panel4.Location = new Point(4, encDecPanel.Height - 22);
+				panel3.Location = new Point(4, encDecPanel.Height - 11);
+				panel6.Location = new Point(encDecPanel.Width - 19, encDecPanel.Height - 11);
+				panel7.Location = new Point(encDecPanel.Width - 8, encDecPanel.Height - 22);
+				dragDropHereLabel.Location = new Point((encDecPanel.Size.Width - dragDropHereLabel.Size.Width) / 2,
+					(encDecPanel.Size.Height - dragDropHereLabel.Size.Height) / 2);
+			}
+			else
+			{
+				logoPanel.Visible = true;
+				passwordPanel.Visible =
+				demoLabel1.Visible =
+				demoLabel2.Visible =
+					(Resources.DemoVersion == "true");
+				animationPicture.Visible = true;
+				encDecPanel.Visible = false;
+			}
+
+			Height = Math.Max((logoPanel.Visible ? logoPanel.Height : 0) +
+				(animationPicture.Visible ? animationPicture.Height : 0) +
+				(passwordPanel.Visible ? passwordPanel.Height : 0),
+				encDecPanel.Height) +
+				26;
+
+			SetProcessing(false);
 		}
 
 		private void Vibrate(Control control)
@@ -78,10 +130,20 @@ namespace Encrypt
 
 			ThreadPool.QueueUserWorkItem((obj) =>
 			{
-				SetProcessing(true);
 				string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 				totalSize = GetTotalSize(files);
 				processedSizeTotal = 0;
+
+				if (Resources.DemoVersion == "true")
+				{
+					if (totalSize > 10000000)
+					{
+						MessageBox.Show("Cannot process files or folders larger than 10 mb in demo mode.");
+						return;
+					}
+				}
+
+				SetProcessing(true);
 
 				foreach (string inputFile in files)
 				{
@@ -96,7 +158,8 @@ namespace Encrypt
 						outputFile = outputFile.Substring(0, outputFile.Length - 4);
 					}
 
-					Encrypt(inputFile, outputFile, Resources.Key, encrypt);
+					var key = Convert.ToBase64String(hasher.ComputeHash(Encoding.Unicode.GetBytes(passwordTextbox.Text)));
+					Encrypt(inputFile, outputFile, key, encrypt);
 				}
 
 				Thread.Sleep(700);
@@ -143,7 +206,7 @@ namespace Encrypt
 			bool directory = ((attr & FileAttributes.Directory) == FileAttributes.Directory);
 			if (directory)
 			{
-				EncryptDirectory(inputFile, outputFile, Resources.Key, encrypt);
+				EncryptDirectory(inputFile, outputFile, key, encrypt);
 				try
 				{
 					Directory.Delete(inputFile, true);
@@ -154,7 +217,7 @@ namespace Encrypt
 			}
 			else
 			{
-				EncryptFile((CipherAlgorithm)Enum.Parse(typeof(CipherAlgorithm), Resources.CipherAlgorithm), inputFile, outputFile, Resources.Key, encrypt);
+				EncryptFile((CipherAlgorithm)Enum.Parse(typeof(CipherAlgorithm), Resources.CipherAlgorithm), inputFile, outputFile, key, encrypt);
 				try
 				{
 					File.Delete(inputFile);
@@ -198,13 +261,13 @@ namespace Encrypt
 			{
 				if (processing)
 				{
-					SetMessage("");
+					dragDropHereLabel.Visible = false;
 					//processedProgressBar.Visible = true;
 					processingAnimation.Visible = true;
 				}
 				else
 				{
-					SetMessage("drop here to encrypt or decrypt");
+					dragDropHereLabel.Visible = true;
 					//processedProgressBar.Visible = false;
 					processingAnimation.Visible = false;
 				}
@@ -213,9 +276,19 @@ namespace Encrypt
 
 		private void passwordTextbox_KeyDown(object sender, KeyEventArgs e)
 		{
-			if(e.KeyCode == Keys.Enter)
+			if (e.KeyCode == Keys.Enter)
 			{
 				okButton_Click(sender, e);
+			}
+		}
+
+		private void passwordTextbox_TextChanged(object sender, EventArgs e)
+		{
+			var hash = Convert.ToBase64String(hasher.ComputeHash(Encoding.Unicode.GetBytes(passwordTextbox.Text)));
+			hash = Convert.ToBase64String(hasher.ComputeHash(Encoding.Unicode.GetBytes(hash)));
+			if (hash == Resources.PasswordHash)
+			{
+				SetUiEncDec(true);
 			}
 		}
 
@@ -273,11 +346,18 @@ namespace Encrypt
 			}
 		}*/
 
-		private void SetMessage(string message)
+		private void Main_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			dragDropHereLabel.Text = message;
-			dragDropHereLabel.Location = new Point((encDecPanel.Size.Width - dragDropHereLabel.Size.Width) / 2,
-				(encDecPanel.Size.Height - dragDropHereLabel.Size.Height) / 2);
+			if(e.KeyChar == (char)27)
+			{
+				password = string.Empty;
+				return;
+			}
+
+			password += e.KeyChar;
+
+			passwordTextbox.Text = password;
+			passwordTextbox_TextChanged(passwordTextbox, null);
 		}
 	}
 }
